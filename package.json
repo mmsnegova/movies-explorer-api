@@ -1,0 +1,25 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "Бэкенд часть веб-приложения movies-explorer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmsnegova/movies-explorer-api.git"
+  },
+  "keywords": [],
+  "author": "mmsnegova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmsnegova/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/mmsnegova/movies-explorer-api#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
