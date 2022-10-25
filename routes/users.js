@@ -13,3 +13,5 @@ router.patch('/me', celebrate({
     name: Joi.string().required().min(2).max(30),
   }),
 }), updateUserProfile);
+
+module.exports = router;
