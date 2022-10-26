@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -12,6 +14,7 @@ const auth = require('./middlewares/auth');
 const error = require('./middlewares/error');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/not-found-err');
+
 const { PORT = 3000 } = process.env;
 
 const app = express();
@@ -46,7 +49,4 @@ app.use((req, res, next) => next(new NotFoundError('Страница не най
 app.use(errorLogger);
 app.use(errors());
 app.use(error);
-app.listen(PORT, () => {
-  // Если всё работает, консоль покажет, какой порт приложение слушает
-  console.log(`App listening on port ${PORT}`)
-})
+app.listen(PORT, () => {});

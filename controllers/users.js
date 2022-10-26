@@ -1,3 +1,4 @@
+const { NODE_ENV, JWT_SECRET } = process.env;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
@@ -10,7 +11,7 @@ const {
   SALT_OR_ROUNDS,
 } = require('../constants/constants');
 
-//создание пользователя
+// создание пользователя
 module.exports.createUser = (req, res, next) => {
   const {
     email,
@@ -43,7 +44,6 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   User.findOne({ email }).select('+password')
     .then((user) => {
-
       if (!user) {
         throw new UnauthorizedError('Неправильные почта или пароль');
       }
@@ -52,7 +52,7 @@ module.exports.login = (req, res, next) => {
           if (!matched) {
             throw new UnauthorizedError('Неправильные почта или пароль');
           }
-          const token = jwt.sign({ _id: user._id }, 'super-strong-secret', {
+          const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'super-strong-secret', {
             expiresIn: '7d',
           });
           return res.status(200).send({ token });
@@ -60,7 +60,7 @@ module.exports.login = (req, res, next) => {
     }).catch(next);
 };
 
-//возвращает информацию о пользователе (email и имя)
+// возвращает информацию о пользователе (email и имя)
 module.exports.getUserMe = (req, res, next) => {
   User.findById(req.user._id)
     .orFail(() => {
@@ -68,14 +68,14 @@ module.exports.getUserMe = (req, res, next) => {
     })
     .then((user) => res.json({
       email: user.email,
-      name: user.name
+      name: user.name,
     }))
     .catch(next);
-}
+};
 
-//обновляет информацию о пользователе (email и имя)
+// обновляет информацию о пользователе (email и имя)
 module.exports.updateUserProfile = (req, res, next) => {
-  const { email, name} = req.body;
+  const { email, name } = req.body;
   User.findByIdAndUpdate(
     req.user._id,
     { email, name },

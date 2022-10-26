@@ -10,7 +10,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  duration : {
+  duration: {
     type: Number,
     required: true,
   },
@@ -62,7 +62,7 @@ const movieSchema = new mongoose.Schema({
   nameEN: {
     type: String,
     required: true,
-  }
+  },
 }, { versionKey: false });
 
 module.exports = mongoose.model('movie', movieSchema);

@@ -4,7 +4,7 @@ const { regex } = require('../constants/constants');
 const {
   getMovies,
   createMovie,
-  deleteMovieById
+  deleteMovieById,
 } = require('../controllers/movies');
 
 router.get('/', getMovies);
